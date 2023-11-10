@@ -4,6 +4,7 @@ import sys
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+import shlex
 
 load_dotenv()
 
@@ -18,8 +19,7 @@ def run_command(command):
 def get_input():
     command = ""
     if len(sys.argv) > 1:
-        for i in range(1, len(sys.argv)):
-            command += sys.argv[i] + " "
+        command = shlex.join(sys.argv[1:])
         return command
     else:
         print("No command provided.")
@@ -32,28 +32,37 @@ def main():
     )
 
     user_input = get_input()
-    if user_input == "exit":
+    if user_input is not None and "exit" in user_input.split():
         exit()
+
     raw_input = "Give me the command to run:" + user_input + "in MacOS terminal, give me the output directly without any explaination in one line."
 
-    completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": raw_input,
-            }
-        ],
-        model="gpt-3.5-turbo",
-    )
-    raw_output = completion.choices[0].message.content
+    try:
+        completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": raw_input,
+                }
+            ],
+            model="gpt-4",
+        )
+        raw_output = completion.choices[0].message.content
+    except Exception as e:
+        print(f"API error: {e}")
+        return
+    
     print("The following command will run: ")
     print("================================")
     print(raw_output)
     print("================================")
     print("Are you sure to run? (y/n)")
     if input() == "y":
+        print("Here is the result after running:")
+        print("================================")
         run_command(raw_output)
     else:
+        print("================================")
         print("Command cancelled.")
 
 if __name__ == "__main__":
