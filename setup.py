@@ -3,13 +3,13 @@ from setuptools import setup, find_packages
 setup(
     name='vow',
     version='0.1',
-    packages=find_packages(),
+    packages=['vow'],
     install_requires=[
         'subprocess', 'sys', 'openai', 'dotenv', 'os'
     ],
     entry_points={
-        'console_scripts': [
-            'my-command=my_package.my_script:main',
+        "console_scripts": [
+            "vow = vow.vow:main",
         ],
     },
     # Additional metadata
