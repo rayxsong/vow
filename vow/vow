@@ -5,8 +5,21 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import shlex
+import time
+import threading
+import itertools
+
 
 load_dotenv()
+
+def spinner(stop_event):
+    for cursor in itertools.cycle('|/-\\'):
+        if stop_event.is_set():
+            break
+        sys.stdout.write(cursor)
+        sys.stdout.flush()
+        sys.stdout.write('\b')
+        time.sleep(0.1)
 
 def run_command(command):
     try:
@@ -36,6 +49,9 @@ def main():
         exit()
 
     raw_input = "Give me the command to run:" + user_input + "in MacOS terminal, give me the output directly without any explaination in one line."
+    stop_event = threading.Event()
+    spinner_thread = threading.Thread(target=spinner, args=(stop_event,))
+    spinner_thread.start()
 
     try:
         completion = client.chat.completions.create(
@@ -52,6 +68,9 @@ def main():
         print(f"API error: {e}")
         return
     
+    stop_event.set()
+    spinner_thread.join()
+    
     print("The following command will run: ")
     print("================================")
     print(raw_output)
@@ -61,6 +80,9 @@ def main():
         print("Here is the result after running:")
         print("================================")
         run_command(raw_output)
+        # check if raw_output contains "rm"
+        if "rm" in raw_output.split():
+            print("Remove excuted.")
     else:
         print("================================")
         print("Command cancelled.")
