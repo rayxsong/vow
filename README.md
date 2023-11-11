@@ -21,5 +21,5 @@ Command cancelled.
 - [ ] Security chcek
 - [ ] Pip package
 - [ ] Multi-line commands running
-- [ ] GPT model change
-- [ ] API key change 
+- [x] GPT model change
+- [x] API key change and reset
