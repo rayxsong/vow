@@ -1,5 +1,6 @@
 # Prototype of vow
 
+## Demo
 Consider you want to install tensorflow but don't know how, type `vow` and your requirement:
 ```python
 vow install tensorflow
@@ -16,3 +17,9 @@ n
 ================================
 Command cancelled.
 ```
+## To-do:
+- [ ] Security chcek
+- [ ] Pip package
+- [ ] Multi-line commands running
+- [ ] GPT model change
+- [ ] API key change 
