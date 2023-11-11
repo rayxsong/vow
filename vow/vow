@@ -18,7 +18,7 @@ def menu():
     parser.add_argument('-reset', action='store_true', help='Reset the stored API key to default')
     parser.add_argument('-show', action='store_true', help='Show the current API key')
     parser.add_argument('-model', action='store_true', help='Change the GPT model')
-    parser.add_argument('command', nargs=argparse.REMAINDER, help='Command to process')
+    parser.add_argument('command', nargs=argparse.REMAINDER, help='Command to ask for GPT model')
 
     args = parser.parse_args()
 

@@ -1,5 +1,21 @@
-# Prototype of vow
+# vow
 
+## Usage
+```
+vow -h
+usage: vow [-h] [-reset] [-show] [-model] ...
+
+Vow CLI Tool
+
+positional arguments:
+  command     Command to ask for GPT model
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -reset      Reset the stored API key to default
+  -show       Show the current API key
+  -model      Change the GPT model
+```
 ## Demo
 Consider you want to install tensorflow but don't know how, type `vow` and your requirement:
 ```python
@@ -23,3 +39,5 @@ Command cancelled.
 - [ ] Multi-line commands running
 - [x] GPT model change
 - [x] API key change and reset
+- [x] Add usage
+- [ ] Orgnize the structure
