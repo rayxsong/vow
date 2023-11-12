@@ -44,3 +44,6 @@ Command cancelled.
 - [x] Add usage
 - [x] Orgnize the structure
 - [ ] Support other os cli
+- [ ] Add reasoning/explaination
+- [ ] Add feedback if not
+- [ ] Add simple mode
