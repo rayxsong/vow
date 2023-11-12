@@ -3,6 +3,7 @@ import argparse
 import configparser
 import os
 
+model_list = ['gpt-3.5-turbo', 'gpt-3.5-turbo-instruct', 'gpt-4']
 
 def menu():
     parser = argparse.ArgumentParser(description='Vow CLI Tool')
@@ -62,6 +63,11 @@ def delete_api_key():
     with open('config.ini', 'w') as configfile:
         config.write(configfile)
 
+def print_model_list():
+    # print the model list with index
+    for i in range(len(model_list)):
+        print(f"{i+1}. {model_list[i]}")
+
 def get_model():
     # First, try to get the API key from an environment variable
     model = os.getenv('GPT_MODEL')
@@ -74,8 +80,16 @@ def get_model():
         if 'openai' in config and 'model' in config['openai']:
             model = config['openai']['model']
         else:
-            # If not found in config, prompt the user to enter it
-            model = input("Enter your OpenAI model(ex. gpt-3.5-turbo, gpt-4): ")
+            # If not the user to enter it
+            print("Enter your OpenAI model frfound in config, prompt om the list: ")
+            print_model_list()
+            # limit input to the model list
+            while True:
+                model = input()
+                if model in model_list:
+                    break
+                else:
+                    print("Invalid model. Please choose from the list above.")
 
             # Optional: Save the entered API key to a config file for future use
             save = input("Do you want to save this model for future use? (y/n): ").lower()
