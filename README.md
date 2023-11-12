@@ -1,4 +1,6 @@
-# vow - cli copilot in python
+# vow - open source cli copilot in python
+
+Currently it only supports your own OpenAI API key.
 
 ## Usage
 ```
