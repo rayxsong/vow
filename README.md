@@ -1,4 +1,4 @@
-# vow
+# vow - cli copilot in python
 
 ## Usage
 ```
@@ -40,4 +40,5 @@ Command cancelled.
 - [x] GPT model change
 - [x] API key change and reset
 - [x] Add usage
-- [ ] Orgnize the structure
+- [x] Orgnize the structure
+- [ ] Support other os cli
