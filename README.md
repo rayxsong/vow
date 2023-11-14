@@ -43,7 +43,7 @@ Command cancelled.
 - [x] API key change and reset
 - [x] Add usage
 - [x] Orgnize the structure
-- [ ] Support other os cli
+- [x] Support other os cli
 - [ ] Add reasoning/explaination
 - [ ] Add feedback if not
 - [ ] Add simple mode

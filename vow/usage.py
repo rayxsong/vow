@@ -10,6 +10,7 @@ def menu():
     parser.add_argument('-reset', action='store_true', help='Reset the stored API key to default')
     parser.add_argument('-show', action='store_true', help='Show the current API key')
     parser.add_argument('-model', action='store_true', help='Change the GPT model')
+    parser.add_argument('-os', action='store_true', help='Change the cli OS')
     parser.add_argument('command', nargs=argparse.REMAINDER, help='Command to ask for GPT model')
 
     args = parser.parse_args()
@@ -30,6 +31,11 @@ def menu():
     if args.model:
         model = get_model()
         switch_model()
+        exit()
+
+    if args.os:
+        os_name = get_os()
+        switch_os()
         exit()
 
 def get_api_key():
@@ -117,3 +123,43 @@ def switch_model():
             with open('config.ini', 'w') as configfile:
                 config.write(configfile)
         print("Model changed.")
+    
+def get_os():
+    os_name = os.getenv('CLI_OS')
+
+    if not os_name:
+        # If not found in environment, try to get it from a config file
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+
+        if 'openai' in config and 'os' in config['openai']:
+            os_name = config['openai']['os']
+        else:
+            # If not found in config, prompt the user to enter it
+            os_name = input("Enter your OS: ")
+
+            # Optional: Save the entered API key to a config file for future use
+            save = input("Do you want to save this OS for future use? (y/n): ").lower()
+            if save == 'y':
+                config['openai'] = {'os': os_name}
+                with open('config.ini', 'w') as configfile:
+                    config.write(configfile)
+    return os_name
+
+def switch_os():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    # print the current model
+    print("Current OS is: " + config['openai']['os'])
+    # check if the user wants to change the model
+    print("Do you want to change the OS? (y/n)")
+    if input() == "y":
+        # prompt the user to enter it
+        os_name = input("Enter your OS: ")
+        # Optional: Save the entered API key to a config file for future use
+        save = input("Do you want to save this OS for future use? (y/n): ").lower()
+        if save == 'y':
+            config['openai'] = {'os': os_name}
+            with open('config.ini', 'w') as configfile:
+                config.write(configfile)
+        print("OS changed.")

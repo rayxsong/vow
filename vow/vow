@@ -10,7 +10,7 @@ import threading
 # import itertools
 # import configparser
 # import argparse
-from usage import menu, get_api_key, get_model
+from usage import menu, get_api_key, get_model, get_os
 from spinner import spinner
 from run import run_command
 from input import get_input
@@ -28,10 +28,11 @@ def main():
     )
 
     user_input = get_input()
+    user_os = get_os()
     if user_input is not None and "exit" in user_input.split():
         exit()
 
-    raw_input = "Give me the command to run:" + user_input + "in MacOS terminal, give me the output directly without any explaination in one line."
+    raw_input = "Give me the command to run:" + user_input + "in" + user_os + "terminal, give me the output directly without any explaination in one line."
     stop_event = threading.Event()
     spinner_thread = threading.Thread(target=spinner, args=(stop_event,))
     spinner_thread.start()
