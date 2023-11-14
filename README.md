@@ -17,6 +17,7 @@ optional arguments:
   -reset      Reset the stored API key to default
   -show       Show the current API key
   -model      Change the GPT model
+  -os         Change the OS of generated cli
 ```
 ## Demo
 Consider you want to install tensorflow but don't know how, type `vow` and your requirement:
