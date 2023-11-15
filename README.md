@@ -46,5 +46,6 @@ Command cancelled.
 - [x] Orgnize the structure
 - [x] Support other os cli
 - [ ] Add reasoning/explaination
-- [ ] Add feedback if not
+- [ ] Add feedback if the user wants to update
 - [ ] Add simple mode
+- [ ] Consider virtual running
