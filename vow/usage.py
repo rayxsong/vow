@@ -87,7 +87,7 @@ def get_model():
             model = config['openai']['model']
         else:
             # If not the user to enter it
-            print("Enter your OpenAI model frfound in config, prompt om the list: ")
+            print("Enter your OpenAI model found in config, prompt on the list: ")
             print_model_list()
             # limit input to the model list
             while True:
